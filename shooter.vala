@@ -1,11 +1,13 @@
 using Gtk;
+using GLib;
 
-namespace info.develop7.Trackee 
-{
-	class Shooter 
-	{
-		static int main(string[] args) 
-		{
+namespace info.develop7.Trackee {
+	class Shooter {
+    protected static string date_prefix() {
+      DateTime dt = new DateTime.now_utc();
+      return dt.format("%Y%m%d%H%M%S");
+    }
+		static int main(string[] args) {
 			Gtk.init (ref args);
 
 			int width, height;
@@ -17,11 +19,12 @@ namespace info.develop7.Trackee
 			Gdk.Pixbuf shot = Gdk.pixbuf_get_from_window(win, 0, 0, width, height);
 
 			try {
-				shot.save("shot.png", "png");
+				shot.savev("shot" + date_prefix() + ".jpg", "jpeg", new string[1]{"quality"}, new string[1]{"80"});
 			}
 			catch (GLib.Error e) {
 				return 1;
 			}
+			
 			return 0;
 		}
 	}
