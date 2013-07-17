@@ -7,6 +7,7 @@ namespace info.develop7.Trackee {
       DateTime dt = new DateTime.now_utc();
       return dt.format("%Y%m%d%H%M%S");
     }
+    
     protected bool save_screenshot() {
       Gdk.Window win = Gdk.get_default_root_window();
 
@@ -24,18 +25,21 @@ namespace info.develop7.Trackee {
       return true;
     }
     
-    public int run() {
-      bool res = this.save_screenshot();
-      
-      return res ? 0 : 1;
-    }
-        
     static int main(string[] args) {
       Gtk.init (ref args);
       
       var sh = new Shooter();
+
+      Timeout.add_seconds(600, () => {
+        stderr.puts("Making a screenshot");
+        sh.save_screenshot();
+        
+        return true;
+      });
       
-      return sh.run();
+      new MainLoop ().run ();
+      
+      return 0;
     }
   }
 }
