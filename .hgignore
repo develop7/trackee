@@ -1,3 +1,5 @@
-syntax: glob
+syntax: regexp
 
-shooter
+^shooter/shooter$
+
+
