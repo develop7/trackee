@@ -1,11 +1,30 @@
 using Gtk;
-using GLib;
 
 namespace info.develop7.Trackee {
-  class Shooter {
+  class Shooter : Object {
+    const string SHARE_DIR = "trackee";
+    const string DATA_DIR = "data";
+    
+    Util.ScreensaverInfo ssi;
+    
+    construct {
+      ssi = new Util.ScreensaverInfo ();
+    }
+    
     protected string date_prefix() {
       DateTime dt = new DateTime.now_utc();
       return dt.format("%Y%m%d%H%M%S");
+    }
+    
+    protected bool screensaver_active() {
+      try {
+        return ssi.is_running();
+      } catch (IOError e) {
+        return false;
+      }
+      catch (DBusError e) {
+        return false;
+      }
     }
     
     protected bool save_screenshot() {
@@ -25,21 +44,12 @@ namespace info.develop7.Trackee {
       return true;
     }
     
-    static int main(string[] args) {
-      Gtk.init (ref args);
+    public bool shoot () {
+      if (!screensaver_active()) {
+        return save_screenshot();
+      }
       
-      var sh = new Shooter();
-
-      Timeout.add_seconds(600, () => {
-        stderr.puts("Making a screenshot");
-        sh.save_screenshot();
-        
-        return true;
-      });
-      
-      new MainLoop ().run ();
-      
-      return 0;
+      return true;
     }
   }
 }
