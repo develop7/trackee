@@ -13,10 +13,16 @@ GTK+ v3.x and GDK v3.x
 
 # Implementation status
 
-*   [x] Screen grabbing
-*   [x] Periodic grabber running
-*   [ ] Collected data viewer
-*   [ ] Aggregated stats generator
-*   [ ] Invoice builder
-*   [ ] Current window info grabbing
+*   ☑ Screen grabbing
+*   ☑ Periodic grabber running
+*   ☐ Collected data viewer
+*   ☐ Aggregated stats generator
+*   ☐ Invoice builder
+*   ☐ Current window info grabbing
+
+# Architecture
+
+*   ☑ Screen grabber daemon
+*   ☐ CLI utility to control daemon
+*   ☐ GUI utility to control daemon
 
