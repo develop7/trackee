@@ -8,10 +8,7 @@ namespace info.develop7.Trackee {
     TimeoutSource ts = new TimeoutSource.seconds(600);
     
     ts.set_callback(() => {
-      if (sh.shoot ()) {
-        print(" Boom!");
-      }
-      print("\n");
+      sh.shoot ();
       return true;
     });
     
