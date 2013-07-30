@@ -24,17 +24,6 @@ namespace info.develop7.Trackee {
       is_enabled = !is_active;
     }
     
-    protected bool screensaver_active() {
-      try {
-        return ssi.is_running ();
-      } catch (IOError e) {
-        return false;
-      }
-      catch (DBusError e) {
-        return false;
-      }
-    }
-    
     protected bool save_screenshot() {
       Gdk.Window win = Gdk.get_default_root_window();
 
