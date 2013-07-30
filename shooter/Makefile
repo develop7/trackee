@@ -1,13 +1,14 @@
 VALAC = valac
 VALAC_FLAGS = --pkg=gtk+-3.0 --pkg=gdk-3.0 --thread
-VALA_FILES = ScreensaverInfo.vala shooter.vala Main.vala
+VALA_FILES = ScreensaverInfo.vala Shooter.vala Main.vala
+EXE = shooter
 
-.PHONY: clean
+.PHONY: all clean
 
-all:	shooter
+all:	${EXE}
 
-shooter:
-	${VALAC} ${VALAC_FLAGS} ${VALA_FILES} --output=shooter
+${EXE}:	${VALA_FILES}
+	${VALAC} ${VALAC_FLAGS} ${VALA_FILES} --output=${EXE}
 
 clean:
-	rm -f shooter
+	rm -f ${EXE}
