@@ -5,7 +5,7 @@ namespace info.develop7.Trackee.Util {
     //public abstract void set_active (bool how) throws IOError;
     //public abstract void lock () throws IOError;
     //public abstract uint32 get_active_time () throws IOError;
-    //public signal void active_changed(bool is_active);
+    public signal void active_changed(bool is_active);
   }
   
   [DBus (name = "org.freedesktop.ScreenSaver")]
@@ -14,7 +14,7 @@ namespace info.develop7.Trackee.Util {
     //public abstract void set_active (bool how) throws IOError;
     //public abstract void lock () throws IOError;
     //public abstract uint32 get_active_time () throws IOError;
-    //public signal void active_changed(bool is_active);
+    public signal void active_changed(bool is_active);
   }
   
   class ScreensaverInfo : Object {
@@ -30,6 +30,9 @@ namespace info.develop7.Trackee.Util {
     construct {
       fss = Bus.get_proxy_sync (BusType.SESSION, FDO_NAME, FDO_PATH);
       gss = Bus.get_proxy_sync (BusType.SESSION, GNOME_NAME, GNOME_PATH);
+      
+      fss.active_changed.connect (handle_active_changed);
+      gss.active_changed.connect (handle_active_changed);
     }
     
     public bool is_running () throws DBusError, IOError {
@@ -51,6 +54,12 @@ namespace info.develop7.Trackee.Util {
       }
       
       return result;
+    }
+    
+    public signal void active_changed (bool is_active);
+    
+    protected void handle_active_changed (bool is_active) {
+      active_changed (is_active);
     }
   }
 }

@@ -11,7 +11,6 @@ namespace info.develop7.Trackee {
       sh.shoot ();
       return true;
     });
-    
     ts.attach(l.get_context());
     
     l.run ();
@@ -19,3 +18,4 @@ namespace info.develop7.Trackee {
     return 0;
   }
 }
+

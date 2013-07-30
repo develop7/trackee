@@ -9,16 +9,24 @@ namespace info.develop7.Trackee {
     
     construct {
       ssi = new Util.ScreensaverInfo ();
+      ssi.active_changed.connect (handle_active_changed);
+      is_enabled = !ssi.is_running ();
     }
+    
+    public bool is_enabled { get; set; }
     
     protected string date_prefix() {
       DateTime dt = new DateTime.now_utc();
       return dt.format("%Y%m%d%H%M%S");
     }
     
+    protected void handle_active_changed (bool is_active) {
+      is_enabled = !is_active;
+    }
+    
     protected bool screensaver_active() {
       try {
-        return ssi.is_running();
+        return ssi.is_running ();
       } catch (IOError e) {
         return false;
       }
@@ -45,7 +53,7 @@ namespace info.develop7.Trackee {
     }
     
     public bool shoot () {
-      if (!screensaver_active()) {
+      if (is_enabled) {
         return save_screenshot();
       }
       
