@@ -1,19 +1,38 @@
-using Gtk;
-
 namespace info.develop7.Trackee {
   class Shooter : Object {
     const string SHARE_DIR = "trackee";
     const string DATA_DIR = "data";
+    const int SHOOT_TIMEOUT = 600; //TODO: should be configurable
     
     Util.ScreensaverInfo ssi;
     
-    construct {
+    MainLoop loop;
+    
+    TimeoutSource tsrc;
+    
+    public Shooter (MainLoop l) {
       ssi = new Util.ScreensaverInfo ();
       ssi.active_changed.connect (handle_active_changed);
-      is_enabled = !ssi.is_running ();
+      
+      loop = l;
     }
     
-    public bool is_enabled { get; set; }
+    protected void set_periodic_shooting (bool enabled) {
+      if (enabled) {
+        tsrc = new TimeoutSource.seconds(SHOOT_TIMEOUT);
+        
+        tsrc.set_callback(() => {
+          shoot ();
+          return true;
+        });
+        tsrc.attach(loop.get_context());
+      }
+      else {
+        tsrc.destroy ();
+      }
+    }
+    
+    bool _is_enabled = true;
     
     protected string date_prefix() {
       DateTime dt = new DateTime.now_utc();
@@ -21,7 +40,7 @@ namespace info.develop7.Trackee {
     }
     
     protected void handle_active_changed (bool is_active) {
-      is_enabled = !is_active;
+      set_periodic_shooting (_is_enabled);
     }
     
     protected bool save_screenshot() {
@@ -42,11 +61,32 @@ namespace info.develop7.Trackee {
     }
     
     public bool shoot () {
-      if (is_enabled) {
-        return save_screenshot();
+      try {
+        if (!ssi.is_running ()) {
+          return save_screenshot();
+        }
+        
+        return true;
       }
+      catch (IOError e) {
+        return false;
+      }
+      catch (DBusError e) {
+        return false;
+      }
+    }
+    
+    public void run () {
+      shoot ();
       
-      return true;
+      set_periodic_shooting (_is_enabled);
+    }
+    
+    public void stop () {
+      shoot ();
+      
+      _is_enabled = false;
+      set_periodic_shooting (_is_enabled);
     }
   }
 }

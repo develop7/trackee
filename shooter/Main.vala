@@ -1,21 +1,49 @@
 namespace info.develop7.Trackee {
-  int main(string[] args) {
-    Gtk.init(ref args);
+  class Main : Object {
+    protected Shooter sh;
     
-    Shooter sh = new Shooter();
+    public MainLoop loop;
     
-    MainLoop l = new MainLoop ();
-    TimeoutSource ts = new TimeoutSource.seconds(600);
+    protected bool _active = true; 
     
-    ts.set_callback(() => {
-      sh.shoot ();
-      return true;
-    });
-    ts.attach(l.get_context());
+    public bool active { 
+      get { return _active; } 
+      set {
+        active_changed (value);
+        _active = value;
+      }
+    }
     
-    l.run ();
+    public signal void active_changed (bool state);
     
-    return 0;
+    public Main (string[] args) {
+      Gtk.init(ref args);
+      
+      loop = new MainLoop ();
+      
+      sh = new Shooter (loop);
+    }
+    
+    public void run () {
+      active_changed.connect ((state) => {
+        if (state) {
+          sh.run ();
+        } 
+        else { 
+          sh.stop ();
+        }
+      });
+      sh.run ();
+      loop.run ();
+    }
+    
+    static int main(string[] args) {
+      var m = new Main (args);
+      
+      m.run();
+      
+      return 0;
+    }
   }
 }
 
