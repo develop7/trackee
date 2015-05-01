@@ -1,5 +1,5 @@
-syntax: regexp
+syntax: glob
 
-^shooter/shooter$
-
-
+\.cabal-sandbox
+dist
+\.idea
