@@ -3,3 +3,4 @@ syntax: glob
 \.cabal-sandbox
 dist
 \.idea
+\.stack-work
