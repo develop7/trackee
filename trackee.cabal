@@ -29,7 +29,7 @@ author:              Andrei Dziahel
 
 -- An email address to which users can send suggestions, bug reports, and
 -- patches.
-maintainer:          Andrei Dziahel <develop7@develop7.info>
+maintainer:          "Andrei Dziahel" <develop7@develop7.info>
 
 -- A copyright notice.
 -- copyright:
@@ -57,7 +57,7 @@ executable trackee
   -- other-extensions:
 
   -- Other library packages from which modules are imported.
-  build-depends:       base >=4.8 && <4.9, gtk, cairo, text, glib
+  build-depends:       base >=4.8 && <4.9, gtk, cairo, text, glib, timers, iso8601-time, time
 
   -- Directories containing source files.
   hs-source-dirs:      src
