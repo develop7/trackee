@@ -57,7 +57,8 @@ executable trackee
   -- other-extensions:
 
   -- Other library packages from which modules are imported.
-  build-depends:       base >=4.8 && <4.9, gtk, cairo, text, glib, timers, iso8601-time, time
+  build-depends:       base >=4.8 && <4.9, text, timers, iso8601-time, time,
+                       gi-gtk, gi-gdk, gi-gdkpixbuf
 
   -- Directories containing source files.
   hs-source-dirs:      src

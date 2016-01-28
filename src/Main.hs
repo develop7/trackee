@@ -1,29 +1,23 @@
 {-# LANGUAGE OverloadedStrings #-}
 module Main where
 
-import Graphics.UI.Gtk
-import Graphics.UI.Gtk.Gdk.Screen
-import System.Environment
-import Data.Text
+import qualified GI.Gtk as Gtk (init)
+import GI.Gdk as Gdk
+import GI.GdkPixbuf as GPxb
+import Data.Text (pack)
+import System.Environment (getArgs)
 import Data.Time (getCurrentTime)
 import Data.Time.ISO8601 (formatISO8601)
 
 main :: IO()
 main = do
   [fileName] <- getArgs
-  initGUI
-  now <- getCurrentTime
-  pxb <- getScreenBuf
-  pixbufSave pxb (renderName fileName (formatISO8601 now) "" ) "png" ([] :: [(Text, Text)])
-
-getScreenBuf :: IO Pixbuf
-getScreenBuf = do
-  Just screen <- screenGetDefault
+  Gtk.init (Just [pack fileName])
+  screen <- screenGetDefault
   window <- screenGetRootWindow screen
-  size <- drawableGetSize window
-  origin <- drawWindowGetOrigin window
-  Just pxbuf <- pixbufGetFromDrawable window ((uncurry . uncurry Rectangle) origin size)
-  return pxbuf
+  (x,y,w,h) <- windowGetGeometry window
+  pxbuf <- pixbufGetFromWindow window x y w h
+  pixbufSavev pxbuf (pack fileName) "jpeg" ["quality"] ["85"]
 
 renderName :: String -> String -> String -> String
 renderName prefix name suffix =
