@@ -2,16 +2,16 @@ flags: {}
 packages:
 - '.'
 extra-deps:
-- gi-atk-0.2.18.10
-- gi-cairo-0.1.14.11
-- gi-gdk-0.3.18.10
-- gi-gdkpixbuf-0.2.32.10
-- gi-gio-0.2.46.10
-- gi-glib-0.2.46.10
-- gi-gobject-0.2.46.10
-- gi-gtk-0.3.18.10
-- gi-pango-0.1.38.10
-- haskell-gi-base-0.11
+- gi-atk-0.2.18.12
+- gi-cairo-0.1.14.12
+- gi-gdk-0.3.18.12
+- gi-gdkpixbuf-0.2.32.12
+- gi-gio-0.2.46.12
+- gi-glib-0.2.46.12
+- gi-gobject-0.2.46.12
+- gi-gtk-0.3.18.12
+- gi-pango-0.1.38.12
+- haskell-gi-base-0.12
 - suspend-0.2.0.0
 - timers-0.2.0.3
 resolver: lts-5.0
