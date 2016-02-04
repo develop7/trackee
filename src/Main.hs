@@ -8,13 +8,14 @@ import           Data.Text (pack)
 import           System.Environment (getArgs)
 import           Data.Time (getCurrentTime)
 import           Data.Time.Format (formatTime, defaultTimeLocale)
+import           Control.Concurrent.Timer (repeatedTimer)
+import           Control.Concurrent.Suspend (sDelay)
 
 main :: IO()
 main = do
   Gtk.init (Just [])
-  pxbuf <- doShot
-  time <- getCurrentTime
-  pixbufSavev pxbuf (pack $ renderName "shot" (renderTime time) "jpg") "jpeg" ["quality"] ["85"]
+  repeatedTimer saveShot (sDelay 10)
+  readLn
 
 renderName :: String -> String -> String -> String
 renderName prefix name suffix =
@@ -29,3 +30,9 @@ doShot = do
   (x,y,w,h) <- windowGetGeometry window
   pixbufGetFromWindow window x y w h
 
+saveShot = do
+  pxbuf <- doShot
+  time <- getCurrentTime
+  putStr $ renderTime time
+  putStrLn " tick"
+  pixbufSavev pxbuf (pack $ renderName "shot" (renderTime time) "jpg") "jpeg" ["quality"] ["85"]

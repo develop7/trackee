@@ -14,7 +14,7 @@ GTK+ v3.x and GDK v3.x
 # Implementation status
 
 *   ☑ Screen grabbing
-*   ☐ Periodic grabber running
+*   ☑ Periodic grabber running
 *   ☐ Collected data viewer
 *   ☐ Aggregated stats generator
 *   ☐ Invoice builder
