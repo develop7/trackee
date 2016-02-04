@@ -8,7 +8,6 @@ import           Data.Text (pack)
 import           System.Environment (getArgs)
 import           Data.Time (getCurrentTime)
 import           Data.Time.Format (formatTime, defaultTimeLocale)
-import           Data.Time.ISO8601 (formatISO8601)
 
 main :: IO()
 main = do
