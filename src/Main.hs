@@ -2,23 +2,31 @@
 module Main where
 
 import qualified GI.Gtk as Gtk (init)
-import           GI.Gdk as Gdk
-import           GI.GdkPixbuf as GPxb
+import           GI.Gdk as Gdk (screenGetDefault, screenGetRootWindow, windowGetGeometry, pixbufGetFromWindow)
+import           GI.GdkPixbuf as GPxb (pixbufSavev)
 import           Data.Text (pack)
 import           System.Environment (getArgs)
 import           Data.Time (getCurrentTime)
+import           Data.Time.Format (formatTime, defaultTimeLocale)
 import           Data.Time.ISO8601 (formatISO8601)
 
 main :: IO()
 main = do
-  [fileName] <- getArgs
-  Gtk.init (Just [pack fileName])
-  screen <- screenGetDefault
-  window <- screenGetRootWindow screen
-  (x,y,w,h) <- windowGetGeometry window
-  pxbuf <- pixbufGetFromWindow window x y w h
-  pixbufSavev pxbuf (pack fileName) "jpeg" ["quality"] ["85"]
+  Gtk.init (Just [])
+  pxbuf <- doShot
+  time <- getCurrentTime
+  pixbufSavev pxbuf (pack $ renderName "shot" (renderTime time) "jpg") "jpeg" ["quality"] ["85"]
 
 renderName :: String -> String -> String -> String
 renderName prefix name suffix =
-    prefix ++ "." ++ name ++ "." ++ suffix ++ ".png"
+    prefix ++ "." ++ name ++ "." ++ suffix
+
+renderTime =
+  formatTime defaultTimeLocale "%Y%m%dT%H%M%S"
+
+doShot = do
+  screen <- screenGetDefault
+  window <- screenGetRootWindow screen
+  (x,y,w,h) <- windowGetGeometry window
+  pixbufGetFromWindow window x y w h
+
