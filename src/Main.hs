@@ -1,15 +1,19 @@
 {-# LANGUAGE OverloadedStrings #-}
 module Main where
 
-import qualified GI.Gtk as Gtk (init)
-import           GI.Gdk as Gdk (screenGetDefault, screenGetRootWindow, windowGetGeometry, pixbufGetFromWindow)
-import           GI.GdkPixbuf as GPxb (pixbufSavev)
-import           Data.Text (pack)
-import           System.Environment (getArgs)
-import           Data.Time (getCurrentTime)
-import           Data.Time.Format (formatTime, defaultTimeLocale)
-import           Control.Concurrent.Timer (repeatedTimer)
 import           Control.Concurrent.Suspend (sDelay)
+import           Control.Concurrent.Timer   (repeatedTimer)
+import           Data.Text                  (pack)
+import           Data.Time                  (getCurrentTime)
+import           Data.Time.Format           (defaultTimeLocale, formatTime)
+import           GI.Gdk                     as Gdk (pixbufGetFromWindow,
+                                                    screenGetDefault,
+                                                    screenGetRootWindow,
+                                                    windowGetGeometry)
+import           GI.GdkPixbuf               as GPxb (pixbufSavev)
+import qualified GI.Gtk                     as Gtk (init)
+import           System.Environment         (getArgs)
+
 
 main :: IO()
 main = do
