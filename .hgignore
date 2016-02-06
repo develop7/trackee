@@ -4,3 +4,4 @@ syntax: glob
 dist
 \.idea
 \.stack-work
+ideaHaskellLib

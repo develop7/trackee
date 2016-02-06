@@ -1,2 +1,5 @@
-shooter/shooter
-
+ideaHaskellLib
+.cabal-sandbox
+dist
+.stack-work
+.idea
