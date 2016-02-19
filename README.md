@@ -5,11 +5,11 @@ much easier.
 
 ## Compiling
 
-[Stack](https://haskellstack.com), GTK+ v3.x and GDK v3.x development headers.
+[Stack](https://haskellstack.com), GDK v3.x development headers.
 
 ## Runtime
 
-GTK+ v3.x and GDK v3.x
+GDK v3.x
 
 # Implementation status
 
@@ -19,10 +19,3 @@ GTK+ v3.x and GDK v3.x
 *   ☐ Aggregated stats generator
 *   ☐ Invoice builder
 *   ☐ Current window info grabbing
-
-# Architecture
-
-*   ☑ Screen grabber daemon
-*   ☐ CLI utility to control daemon
-*   ☐ GUI utility to control daemon
-
