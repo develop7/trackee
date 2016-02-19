@@ -51,14 +51,25 @@ executable trackee
   main-is:             Main.hs
 
   -- Modules included in this executable, other than Main.
-  other-modules:
+  other-modules:       Trackee.Types, Trackee.Agents.Screen
 
   -- LANGUAGE extensions used by modules in this package.
   -- other-extensions:
 
   -- Other library packages from which modules are imported.
-  build-depends:       base >=4.8 && <4.9, text, timers, time, suspend,
-                       gi-gtk, gi-gdk, gi-gdkpixbuf
+  build-depends:       base >=4.8 && <4.9,
+                       text,
+                       timers,
+                       time,
+                       suspend,
+                       gi-gtk,
+                       gi-gdk,
+                       gi-gdkpixbuf,
+                       dbus,
+                       bytestring,
+                       tuple,
+                       transformers,
+                       MissingH
 
   -- Directories containing source files.
   hs-source-dirs:      src

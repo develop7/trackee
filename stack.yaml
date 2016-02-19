@@ -14,4 +14,6 @@ extra-deps:
 - haskell-gi-base-0.12
 - suspend-0.2.0.0
 - timers-0.2.0.3
+- tuple-0.3.0.2
+- OneTuple-0.2.1
 resolver: lts-5.0
