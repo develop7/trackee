@@ -1,14 +1,14 @@
 {-# LANGUAGE OverloadedStrings #-}
 module Trackee.Agents.Screen (newAgent) where
 
-import           Trackee.Types             as T
-
-import           Control.Monad.Trans.Maybe
 import           Data.ByteString           as B
-import           Data.Tuple.Curry
-import           GI.Gdk                    as Gdk
-import           GI.GdkPixbuf              as GPxb
+import           GI.Gdk                    as Gdk (pixbufGetFromWindow,
+                                                   screenGetDefault,
+                                                   screenGetRootWindow,
+                                                   windowGetGeometry)
+import           GI.GdkPixbuf              as GPxb (pixbufSaveToBufferv)
 
+import           Trackee.Types             as T
 
 newAgent :: T.Agent
 newAgent = T.Agent {name = "screen", description = "Grabs screenshots", event = readEvent}

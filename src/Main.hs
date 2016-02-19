@@ -3,20 +3,18 @@ module Main where
 
 import           Control.Concurrent.Suspend (sDelay)
 import           Control.Concurrent.Timer   (repeatedTimer)
-import qualified Data.ByteString            as B
+import qualified Data.ByteString            as B (writeFile)
 import           Data.String.Utils          (join)
-import           Data.Text                  (pack)
 import           Data.Time                  (getCurrentTime)
 import           Data.Time.Format           (defaultTimeLocale, formatTime)
-import qualified GI.Gtk                     as Gtk (init, main)
-import           System.Environment         (getArgs)
+import qualified GI.Gdk                     as Gdk (init)
 
 import           Trackee.Agents.Screen      as S
 import           Trackee.Types              as T
 
 main :: IO()
 main = do
-  Gtk.init (Just [])
+  Gdk.init []
   repeatedTimer processEvents (sDelay 10)
   readLn
 

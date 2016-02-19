@@ -62,7 +62,6 @@ executable trackee
                        timers,
                        time,
                        suspend,
-                       gi-gtk,
                        gi-gdk,
                        gi-gdkpixbuf,
                        dbus,

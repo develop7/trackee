@@ -9,7 +9,6 @@ extra-deps:
 - gi-gio-0.2.46.12
 - gi-glib-0.2.46.12
 - gi-gobject-0.2.46.12
-- gi-gtk-0.3.18.12
 - gi-pango-0.1.38.12
 - haskell-gi-base-0.12
 - suspend-0.2.0.0
