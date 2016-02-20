@@ -11,11 +11,12 @@ much easier.
 
 GDK v3.x
 
-# Implementation status
+# High-level goal
 
-*   ☑ Screen grabbing
-*   ☑ Periodic grabber running
-*   ☐ Collected data viewer
-*   ☐ Aggregated stats generator
-*   ☐ Invoice builder
-*   ☐ Current window info grabbing
+Match Upwork Team features
+
+# TODO
+
+* IPC interface
+* Collect active window name
+* Windows & Mac support
