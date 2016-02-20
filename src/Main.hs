@@ -28,11 +28,14 @@ renderTime =
 
 agents = [S.newAgent]
 
-processEvents = do
-    time <- getCurrentTime
-    mapM_ (\agent -> do
-                    shot <- file $ event agent
-                    B.writeFile (renderName "shot" (renderTime time) "jpeg") shot
-                ) agents
-    putStrLn $ ">" ++ renderTime time ++ "<" ++ " processed data from agents:" ++ join ", " (map name agents)
+processEvents =
+    let
+        writeScreenshot time agent = do
+            shot <- file $ event agent
+            B.writeFile (renderName "shot" (renderTime time) "jpeg") shot
+    in
+    do
+        time <- getCurrentTime
+        mapM_ (writeScreenshot time) agents
+        putStrLn $ ">" ++ renderTime time ++ "<" ++ " processed data from agents:" ++ join ", " (map name agents)
 
