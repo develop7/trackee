@@ -1,14 +1,11 @@
 {-# LANGUAGE OverloadedStrings #-}
 module Trackee.Agents.Screen (newAgent) where
 
-import           Data.ByteString           as B
-import           GI.Gdk                    as Gdk (pixbufGetFromWindow,
-                                                   screenGetDefault,
-                                                   screenGetRootWindow,
-                                                   windowGetGeometry)
-import           GI.GdkPixbuf              as GPxb (pixbufSaveToBufferv)
+import Data.ByteString as B
+import GI.Gdk          as Gdk (pixbufGetFromWindow, screenGetDefault, screenGetRootWindow, windowGetGeometry)
+import GI.GdkPixbuf    as GPxb (pixbufSaveToBufferv)
 
-import           Trackee.Types             as T
+import Trackee.Types as T
 
 newAgent :: T.Agent
 newAgent = T.Agent {name = "screen", description = "Grabs screenshots", event = readEvent}
@@ -18,11 +15,11 @@ readEvent =
 
 doShot :: IO B.ByteString
 doShot = do
-         screen <- screenGetDefault
-         window <- screenGetRootWindow screen
-         (x,y,w,h) <- windowGetGeometry window
-         pxbuf <- pixbufGetFromWindow window x y w h
-         pixbufSaveToBufferv pxbuf "jpeg" ["quality"] ["85"]
+     screen <- screenGetDefault
+     window <- screenGetRootWindow screen
+     (x,y,w,h) <- windowGetGeometry window
+     pxbuf <- pixbufGetFromWindow window x y w h
+     pixbufSaveToBufferv pxbuf "jpeg" ["quality"] ["85"]
 
 {-
 doShot =
