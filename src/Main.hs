@@ -1,7 +1,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 module Main where
 
-import           Control.Concurrent.Suspend (sDelay, suspend)
+import           Control.Concurrent.Suspend (mDelay, sDelay, suspend)
 import           Control.Concurrent.Timer   (repeatedTimer)
 import           Control.Monad              (forever)
 import qualified Data.ByteString            as B (writeFile)
@@ -16,7 +16,7 @@ import Trackee.Types         as T
 main :: IO()
 main = do
     Gdk.init []
-    repeatedTimer processEvents (sDelay 10)
+    repeatedTimer processEvents (mDelay 1)
     forever (suspend (sDelay 1)) -- main loop
 
 renderName :: String -> String -> String -> String
