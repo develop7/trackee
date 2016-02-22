@@ -13,7 +13,7 @@ main :: IO()
 main = do
     initAgents
     initRoutine
-    forever (suspend (sDelay 1)) -- main loop
+    forever $ suspend (sDelay 1) -- main loop
 
 agents = [S.newAgent]
 
