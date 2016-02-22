@@ -11,8 +11,14 @@ import Trackee.Events.Processor as E (processEvents)
 
 main :: IO()
 main = do
-    Gdk.init []
-    repeatedTimer (E.processEvents agents) (mDelay 1)
+    initAgents
+    startRoutine
     forever (suspend (sDelay 1)) -- main loop
 
 agents = [S.newAgent]
+
+initAgents =
+    Gdk.init []
+
+startRoutine =
+    repeatedTimer (E.processEvents agents) (mDelay 1)
