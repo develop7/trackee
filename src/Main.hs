@@ -12,16 +12,16 @@ import qualified Trackee.Types            as T (Agent (..))
 
 main :: IO()
 main = do
-    initAgents
-    initRoutine
+    setupAgents
+    setupRoutine
     forever $ suspend (sDelay 1) -- main loop
 
 agents = [A.Screen]
 
-initAgents =
+setupAgents =
     mapM_ T.agentSetup agents
 
-initRoutine = do
+setupRoutine = do
     theRoutine -- collect data right after starting
     repeatedTimer theRoutine (mDelay 1) -- and repeat it
     where
