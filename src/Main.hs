@@ -6,7 +6,7 @@ import           Control.Concurrent.Timer   (repeatedTimer)
 import           Control.Monad              (forever)
 import qualified GI.Gdk                     as Gdk (init)
 
-import Trackee.Agents.Screen    as S (newAgent)
+import Trackee.Agents as A (Screen(..))
 import Trackee.Events.Processor as E (processEvents)
 
 main :: IO()
@@ -15,7 +15,7 @@ main = do
     initRoutine
     forever $ suspend (sDelay 1) -- main loop
 
-agents = [S.newAgent]
+agents = [Screen]
 
 initAgents =
     Gdk.init []

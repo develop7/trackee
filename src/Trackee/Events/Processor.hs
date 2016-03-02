@@ -5,19 +5,19 @@ import           Data.String.Utils (join)
 import           Data.Time         (getCurrentTime)
 import           Data.Time.Format  (defaultTimeLocale, formatTime)
 
-import Trackee.Agents.Screen as S
-import Trackee.Types         as T
+import qualified Trackee.Agents as A (Screen)
+import qualified Trackee.Types  as T
 
 processEvents agents =
     let
         writeScreenshot time agent = do
-            shot <- file $ event agent
+            shot <- T.file $ T.agentEvent agent
             B.writeFile (renderName "shot" (renderTime time) "jpeg") shot
     in
     do
         time <- getCurrentTime
         mapM_ (writeScreenshot time) agents
-        putStrLn $ ">" ++ renderTime time ++ "<" ++ " processed data from agents:" ++ join ", " (map name agents)
+        putStrLn $ ">" ++ renderTime time ++ "<" ++ " processed data from agents:" ++ join ", " (map T.agentName agents)
 
 renderName :: String -> String -> String -> String
 renderName prefix name suffix =
