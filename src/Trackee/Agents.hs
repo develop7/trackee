@@ -1,12 +1,15 @@
 {-# LANGUAGE OverloadedStrings #-}
 module Trackee.Agents ( Screen(..) ) where
 
-import Data.ByteString as B
-import GI.Gdk          as Gdk (pixbufGetFromWindow, screenGetDefault, screenGetRootWindow, windowGetGeometry, init)
-import GI.GdkPixbuf    as GPxb (pixbufSaveToBufferv)
+import qualified Data.ByteString as B
+import qualified GI.Gdk          as Gdk (init, pixbufGetFromWindow, screenGetDefault, screenGetRootWindow,
+                                         windowGetGeometry)
+import qualified GI.GdkPixbuf    as GPxb (pixbufSaveToBufferv)
 
 import Trackee.Types as T
 
+-- | An screen-shooting agent.
+-- | Makes screenshots with GDK, saves them in JPEG and returns @T.File@ with them
 data Screen = Screen
 
 instance T.Agent Screen where
@@ -19,9 +22,9 @@ instance T.Agent Screen where
 
 doScreenshot :: IO B.ByteString
 doScreenshot = do
-     screen <- screenGetDefault
-     window <- screenGetRootWindow screen
-     (x,y,w,h) <- windowGetGeometry window
-     pxbuf <- pixbufGetFromWindow window x y w h
-     pixbufSaveToBufferv pxbuf "jpeg" ["quality"] ["85"]
+     screen <- Gdk.screenGetDefault
+     window <- Gdk.screenGetRootWindow screen
+     (x,y,w,h) <- Gdk.windowGetGeometry window
+     pxbuf <- Gdk.pixbufGetFromWindow window x y w h
+     GPxb.pixbufSaveToBufferv pxbuf "jpeg" ["quality"] ["85"]
 
