@@ -23,6 +23,6 @@ setupAgents =
 
 setupRoutine = do
     theRoutine -- collect data right after starting
-    repeatedTimer theRoutine (mDelay 1) -- and repeat it
+    repeatedTimer theRoutine (mDelay 1) -- and repeat it. TODO: delay should be configurable
     where
         theRoutine = E.processEvents agents
