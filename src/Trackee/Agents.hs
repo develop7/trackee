@@ -12,13 +12,15 @@ import Trackee.Types as T
 -- | Makes screenshots with GDK, saves them in JPEG and returns @T.File@ with them
 data Screen = Screen
 
-instance T.Agent Screen where
-    agentName Screen = "screen"
-    agentDesc Screen = "Grabs screenshots"
-    agentEvent Screen =  T.File {mimeType = "image/jpeg", file = doScreenshot}
-    agentSetup Screen = do
+instance T.Plug Screen where
+    name Screen = "screen"
+    description Screen = "Grabs screenshots"
+    setup Screen = do
         Gdk.init []
         return ()
+
+instance T.Agent Screen where
+    event Screen =  T.File {mimeType = "image/jpeg", file = doScreenshot}
 
 doScreenshot :: IO B.ByteString
 doScreenshot = do

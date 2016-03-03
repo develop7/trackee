@@ -8,7 +8,7 @@ import qualified GI.Gdk                     as Gdk (init)
 
 import qualified Trackee.Agents           as A (Screen (..))
 import qualified Trackee.Events.Processor as E (processEvents)
-import qualified Trackee.Types            as T (Agent (..))
+import qualified Trackee.Types            as T (Agent (..), Plug (..))
 
 main :: IO()
 main = do
@@ -19,7 +19,7 @@ main = do
 agents = [A.Screen]
 
 setupAgents =
-    mapM_ T.agentSetup agents
+    mapM_ T.setup agents
 
 setupRoutine = do
     theRoutine -- collect data right after starting

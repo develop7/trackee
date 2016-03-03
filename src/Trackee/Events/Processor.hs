@@ -11,13 +11,13 @@ import qualified Trackee.Types  as T
 processEvents agents =
     let
         writeScreenshot time agent = do
-            shot <- T.file $ T.agentEvent agent
+            shot <- T.file $ T.event agent
             B.writeFile (renderName "shot" (renderTime time) "jpeg") shot
     in
     do
         time <- getCurrentTime
         mapM_ (writeScreenshot time) agents
-        putStrLn $ ">" ++ renderTime time ++ "<" ++ " processed data from agents:" ++ join ", " (map T.agentName agents)
+        putStrLn $ ">" ++ renderTime time ++ "<" ++ " processed data from agents:" ++ join ", " (map T.name agents)
 
 renderName :: String -> String -> String -> String
 renderName prefix name suffix =
