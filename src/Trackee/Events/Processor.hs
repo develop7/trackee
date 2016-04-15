@@ -12,16 +12,16 @@ processEvents agents =
     let
         writeScreenshot time agent = do
             shot <- T.file $ T.event agent
-            B.writeFile (renderName "shot" (renderTime time) "jpeg") shot
+            B.writeFile (renderName ["shot", renderTime time, "jpeg"]) shot
     in
     do
         time <- getCurrentTime
         mapM_ (writeScreenshot time) agents
         putStrLn $ ">" ++ renderTime time ++ "<" ++ " processed data from agents:" ++ join ", " (map T.name agents)
 
-renderName :: String -> String -> String -> String
-renderName prefix name suffix =
-    prefix ++ "." ++ name ++ "." ++ suffix
+renderName :: [String] -> String
+renderName =
+    join "."
 
 renderTime =
   formatTime defaultTimeLocale "%Y%m%dT%H%M%S"
