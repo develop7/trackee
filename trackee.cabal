@@ -68,7 +68,8 @@ executable trackee
                        bytestring,
                        tuple,
                        transformers,
-                       MissingH
+                       MissingH,
+                       stm
 
   -- Directories containing source files.
   hs-source-dirs:      src
