@@ -24,9 +24,9 @@ instance T.Agent Screen where
 
 doScreenshot :: IO B.ByteString
 doScreenshot = do
-     screen <- Gdk.screenGetDefault
+     Just screen <- Gdk.screenGetDefault
      window <- Gdk.screenGetRootWindow screen
      (x,y,w,h) <- Gdk.windowGetGeometry window
-     pxbuf <- Gdk.pixbufGetFromWindow window x y w h
+     Just pxbuf <- Gdk.pixbufGetFromWindow window x y w h
      GPxb.pixbufSaveToBufferv pxbuf "jpeg" ["quality"] ["85"]
 
