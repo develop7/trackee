@@ -1,4 +1,3 @@
-{-# LANGUAGE OverloadedStrings #-}
 module Main where
 
 import           Control.Concurrent.Suspend (mDelay, sDelay, suspend)
@@ -10,19 +9,18 @@ import qualified Trackee.Agents           as A (Screen (..))
 import qualified Trackee.Events.Processor as E (processEvents)
 import qualified Trackee.Types            as T (Agent (..), Plug (..))
 
-main :: IO()
+main :: IO ()
 main = do
-    setupAgents
-    setupRoutine
-    forever $ suspend (sDelay 1) -- main loop
+  setupAgents
+  setupRoutine
+  forever $ suspend (sDelay 1) -- main loop
 
 agents = [A.Screen]
 
-setupAgents =
-    mapM_ T.setup agents
+setupAgents = mapM_ T.setup agents
 
 setupRoutine = do
-    theRoutine -- collect data right after starting
-    repeatedTimer theRoutine (mDelay 1) -- and repeat it. TODO: delay should be configurable
-    where
-        theRoutine = E.processEvents agents
+  theRoutine -- collect data right after starting
+  repeatedTimer theRoutine (mDelay 1) -- and repeat it. TODO: delay should be configurable
+  where
+    theRoutine = E.processEvents agents
