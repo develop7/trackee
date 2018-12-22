@@ -34,7 +34,7 @@ maintainer:          "Andrei Dziahel" <develop7@develop7.info>
 -- A copyright notice.
 -- copyright:
 
-category:            Graphics
+category:            Productivity
 
 build-type:          Simple
 
@@ -57,13 +57,14 @@ executable trackee
   -- other-extensions:
 
   -- Other library packages from which modules are imported.
-  build-depends:       base >=4.9 && <4.10
+  build-depends:       base >=4.11 && <4.12
                      , text
                      , timers
                      , time
                      , suspend
                      , gi-gdk
                      , gi-gdkpixbuf
+                     , gi-wnck
                      , dbus
                      , bytestring
                      , tuple
