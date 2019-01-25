@@ -4,4 +4,5 @@ extra-deps:
 - suspend-0.2.0.0
 - timers-0.2.0.3
 - gi-wnck-3.0.1
-resolver: lts-12.24
+resolver: lts-13.4
+
