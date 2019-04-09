@@ -8,7 +8,7 @@ import qualified GI.GdkPixbuf    as Gdk.Pxb (pixbufSaveToBufferv)
 
 import Trackee.Types as T
 
--- | An screen-shooting agent.
+-- | A screen-shooting agent.
 -- | Makes screenshots with GDK, saves them in JPEG and returns @T.File@ with them
 data Screen = Screen
 
