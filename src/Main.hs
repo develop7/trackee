@@ -8,7 +8,7 @@ import           Control.Monad              (forever)
 import qualified Data.ByteString            as B (ByteString, writeFile)
 import           Data.String.Utils          (join)
 import           Data.Time                  (UTCTime, defaultTimeLocale, formatTime, getCurrentTime)
-import           DBus                       (MethodCall (..), methodCall)
+import           DBus                       (MethodCall (..), MethodReturn (..), Variant (..), methodCall, fromVariant)
 import           DBus.Client                (call_, connectSession)
 import qualified GI.Gdk                     as Gdk (init, pixbufGetFromWindow, screenGetDefault, screenGetRootWindow,
                                                     windowGetGeometry)
@@ -47,7 +47,8 @@ isInhibited = do
       client
       (methodCall "/org/gnome/ScreenSaver" "org.gnome.ScreenSaver" "GetActive")
         {methodCallDestination = Just "org.gnome.ScreenSaver"}
-  return False
+  let Just ret = fromVariant $ head $ methodReturnBody reply
+  return ret
 
 writeScreenshot :: UTCTime -> B.ByteString -> IO ()
 writeScreenshot now bytes = B.writeFile (renderName ["shot", renderTime now, "jpeg"]) bytes
