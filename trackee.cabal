@@ -51,7 +51,7 @@ executable trackee
   main-is:             Main.hs
 
   -- Modules included in this executable, other than Main.
-  other-modules:       Trackee.Types, Trackee.Agents, Trackee.Events.Processor
+  --other-modules:       Trackee.Types, Trackee.Agents, Trackee.Events.Processor
 
   -- LANGUAGE extensions used by modules in this package.
   -- other-extensions:
@@ -67,10 +67,7 @@ executable trackee
                      , gi-wnck
                      , dbus
                      , bytestring
-                     , tuple
-                     , transformers
                      , MissingH
-                     , stm
 
   -- Directories containing source files.
   hs-source-dirs:      src

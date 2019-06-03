@@ -1,7 +1,7 @@
 packages:
 - .
 extra-deps:
-- suspend-0.2.0.0
-- timers-0.2.0.3
-- gi-wnck-3.0.1
-resolver: lts-13.16
+  - 'gi-wnck-3.0.1@sha256:bb0f30fc75560b4f1ce2a955dc0b371f25a0504d69126e559211fee35b5b0e6b'
+  - 'suspend-0.2.0.0@sha256:0d98526558b773c3ff792664bc45d7a083a32eedb6206d4101a7570869c75a28'
+  - 'timers-0.2.0.3@sha256:ec91266e5ed73e958857fd07332ed547ea01205133769fba51cc40577549ffe9'
+resolver: lts-13.24
