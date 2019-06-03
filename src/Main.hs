@@ -7,13 +7,10 @@ import           Control.Concurrent.Timer   (repeatedTimer)
 import           Control.Monad              (forever)
 import qualified Data.ByteString            as B (ByteString, writeFile)
 import           Data.String.Utils          (join)
-import           Data.Time                  (UTCTime, defaultTimeLocale,
-                                             formatTime, getCurrentTime)
+import           Data.Time                  (UTCTime, defaultTimeLocale, formatTime, getCurrentTime)
 import           DBus                       (MethodCall (..), methodCall)
 import           DBus.Client                (call_, connectSession)
-import qualified GI.Gdk                     as Gdk (init, pixbufGetFromWindow,
-                                                    screenGetDefault,
-                                                    screenGetRootWindow,
+import qualified GI.Gdk                     as Gdk (init, pixbufGetFromWindow, screenGetDefault, screenGetRootWindow,
                                                     windowGetGeometry)
 import qualified GI.GdkPixbuf               as Gdk.PB (pixbufSaveToBufferv)
 import qualified GI.Wnck                    as Wnck (screenGetShowingDesktop)
